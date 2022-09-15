@@ -1,0 +1,39 @@
+body {
+  background: url("/img/Dolby\ bg.png");
+}
+
+button:hover {
+  background: #694d3c;
+}
+
+.hidden {
+  display: none;
+}
+
+#join-doc {
+  display: initial;
+}
+
+#participant-container {
+  display: none;
+}
+
+#video--container {
+  display: none;
+  grid-template-columns: 350px 350px;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  grid-template-rows: 350px;
+}
+
+#vc--controls,
+#vc--controls--patient {
+  display: none;
+  position: absolute;
+  bottom: -1;
+  width: 75%;
+  height: 50px; /* Height of the footer */
+  background-color: #4c6ef5;
+}
