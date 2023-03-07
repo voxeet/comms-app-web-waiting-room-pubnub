@@ -445,17 +445,19 @@ const IntializeandOpenSession = async () => {
     console.log("IntializeandOpenSession: ", error);
   }
 
-  VoxeetSDK.initializeToken(accessToken);
-  // const consumerKey = "f3_ZOFG3b1w5s13CbjwELQ==";
-  // const consumerSecret = "6mNXCuJzAYAAEa9h5ev_nhuK6EbOlU3VBIfWNKyBReo=";
-  // VoxeetSDK.initialize(consumerKey, consumerSecret);
+  VoxeetSDK.initializeToken(accessToken, async () => {
+    const r = await fetch(`/clientAccessToken`);
+    const jResp = await r.json();
+    return jResp.accessToken;
+  });
+
   try {
     await VoxeetSDK.session.open({ name: "Host" });
     console.log("Host session");
   } catch (error) {
     console.log("====================================");
     console.log(`Something went wrong ${error}`);
-    // console.log("====================================");
+    console.log("====================================");
   }
 };
 IntializeandOpenSession();
