@@ -8,7 +8,7 @@ Setup a waiting room feature on Dolby.io Video conferences using presence from P
 Following [this blog](https://dolby.io/blog/implementing-a-virtual-waiting-room-feature-with-pubnub-user-presence-messaging-and-dolby-io/), a doctor and patient use a Telehealth web application with Dolby.io integration for virtual consultations. They communicate through messaging and, once ready, establish a personalized conference for the consultation.
 
 # Requirements
-You will need a [Dolby.io account](dolby.io) to access the Communications API keys as well as an account on Pubnub for user presence and messaging functionality—also access to a Node.js code execution environment. 
+You will need a [Dolby.io account](https://dolby.io/) to access the Communications API keys as well as an account on Pubnub for user presence and messaging functionality—also access to a Node.js code execution environment. 
 Knowing web development, such as HTML, CSS, and Javascript, will be helpful.
 
 # Getting Started
