@@ -13,10 +13,10 @@ Knowing web development, such as HTML, CSS, and Javascript, will be helpful.
 
 # Getting Started
 ## Required NPM packages  
-  - [dolbyio/dolbyio-rest-apis-client@3.1.0](https://www.npmjs.com/package/@dolbyio/dolbyio-rest-apis-client)
-  - [dotenv@16.0.1](https://www.npmjs.com/package/dotenv)
-  - [express@4.18.1](https://www.npmjs.com/package/express)
-  - [pubnub@7.2.0](https://www.npmjs.com/package/pubnub)
+  - [dolbyio/dolbyio-rest-apis-client](https://www.npmjs.com/package/@dolbyio/dolbyio-rest-apis-client)
+  - [dotenv](https://www.npmjs.com/package/dotenv)
+  - [express](https://www.npmjs.com/package/express)
+  - [pubnub](https://www.npmjs.com/package/pubnub)
 
 # Report a Bug 
 In the case any bugs occur, report it using Github issues, and we will see to it. 
@@ -54,4 +54,3 @@ Using decades of Dolby's research in sight and sound technology, Dolby.io provid
 &nbsp; &nbsp; &nbsp;
   <a href="https://www.linkedin.com/company/dolbyio/" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white" alt="Dolby.io on LinkedIn"/></a>
 </div>
-

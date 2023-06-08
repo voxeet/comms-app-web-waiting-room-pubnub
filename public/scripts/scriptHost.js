@@ -152,7 +152,7 @@ const CreateandJoinConference = async (conferenceAliasInput) => {
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-const handleStartandStopAudio = () => {
+const handleStartAndStopAudio = () => {
   if (muteAudioFlag === true) {
     // Start sharing the Audio with the other participants
     VoxeetSDK.conference
@@ -180,7 +180,7 @@ const handleStartandStopAudio = () => {
 };
 
 //Function to handle video streams
-const handleStartandStopVideo = () => {
+const handleStartAndStopVideo = () => {
   if (hideCameraFlag === true) {
     // Start sharing the video with the other participants
     VoxeetSDK.conference

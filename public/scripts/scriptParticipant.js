@@ -127,7 +127,7 @@ const InviteParticipanttotheMeeting = async (participantID) => {
   VoxeetSDK.notification.invite(conference, participants);
   participantID.remove();
 };
-const handleStartandStopAudio = () => {
+const handleStartAndStopAudio = () => {
   if (muteAudioFlag === true) {
     // Start sharing the Audio with the other participants
     VoxeetSDK.conference
@@ -155,7 +155,7 @@ const handleStartandStopAudio = () => {
 };
 
 //Function to handle video streams
-const handleStartandStopVideo = () => {
+const handleStartAndStopVideo = () => {
   if (hideCameraFlag === true) {
     // Start sharing the video with the other participants
     VoxeetSDK.conference

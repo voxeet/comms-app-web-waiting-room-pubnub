@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@dolbyio/dolbyio-rest-apis-client": "^3.5.2",
-    "dotenv": "^16.0.3",
+    "@dolbyio/dolbyio-rest-apis-client": "^3.6.0",
+    "dotenv": "^16.1.4",
     "express": "^4.18.2"
   }
 }

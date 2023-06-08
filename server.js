@@ -23,14 +23,25 @@ app.use("/host", express.static(hostPath));
 const participantPath = path.join(__dirname, "./public/participant.html");
 app.use("/participant", express.static(participantPath));
 
-// serving up some fierce CSS lewks
+// serving static files
 app.use(express.static(path.join(__dirname, "public")));
 
 // prettier-ignore
 app.get("/clientAccessToken", async function (request, response) {
-  const jwt = await dolbyio.communications.authentication.getClientAccessToken(APP_KEY, APP_SECRET);
+  const apiToken = await dolbyio.authentication.getApiAccessToken(
+    APP_KEY,
+    APP_SECRET,
+    600,
+    ['comms:client_access_token:create']
+  );
+
+  const clientAccessToken = await dolbyio.communications.authentication.getClientAccessTokenV2({
+    accessToken: apiToken,
+    sessionScope: ['*'],
+  });
+
   response.send({
-    accessToken: jwt.access_token,
+    accessToken: clientAccessToken.access_token,
   });
 });
 
