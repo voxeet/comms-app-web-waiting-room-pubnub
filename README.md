@@ -2,7 +2,7 @@
 
 ![Blog Picture](https://dolby.io/wp-content/uploads/2022/10/Dolby.io_PubNub-V1@1.5x-80.jpg)
 # Implementing a Virtual Waiting Room Feature With PubNub User Presence, Messaging and Dolby.io
-Setup a waiting room feature on Dolby.io Video conferences using presence from PubNub.
+Setup a waiting room feature on Dolby.io video conferences using presence from PubNub.
 
 # Overview
 Following [this blog](https://dolby.io/blog/implementing-a-virtual-waiting-room-feature-with-pubnub-user-presence-messaging-and-dolby-io/), a doctor and patient use a Telehealth web application with Dolby.io integration for virtual consultations. They communicate through messaging and, once ready, establish a personalized conference for the consultation.
