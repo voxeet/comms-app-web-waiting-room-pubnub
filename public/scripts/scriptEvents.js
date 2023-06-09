@@ -27,13 +27,11 @@ VoxeetSDK.conference.on("streamRemoved", (participant, stream) => {
 });
 
 VoxeetSDK.conference.on("participantUpdated", (participant) => {
-  // console.log(participant, "participantUpdated");
-  console.log("PU");
+  console.log("participantUpdated", participant);
 });
 
 VoxeetSDK.conference.on("participantAdded", (participant) => {
-  // console.log(participant, "participantaddedevent");
-  console.log(participant.info.name);
+  console.log("participantAdded", participant);
 });
 
 VoxeetSDK.conference.on("left", () => {
@@ -47,5 +45,5 @@ VoxeetSDK.conference.on("joined", () => {
 VoxeetSDK.notification.on("invitation", (e) => {
   console.log("invitation event");
   console.log(e.conferenceId);
-  admitUsertoMeeting(e.conferenceId);
+  admitUserToMeeting(e.conferenceId);
 });

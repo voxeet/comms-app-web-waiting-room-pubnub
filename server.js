@@ -27,7 +27,7 @@ app.use("/participant", express.static(participantPath));
 app.use(express.static(path.join(__dirname, "public")));
 
 // prettier-ignore
-app.get("/clientAccessToken", async function (request, response) {
+app.get("/client-access-token/:externalId", async function (request, response) {
   const apiToken = await dolbyio.authentication.getApiAccessToken(
     APP_KEY,
     APP_SECRET,
@@ -37,6 +37,7 @@ app.get("/clientAccessToken", async function (request, response) {
 
   const clientAccessToken = await dolbyio.communications.authentication.getClientAccessTokenV2({
     accessToken: apiToken,
+    externalId: request.params.externalId,
     sessionScope: ['*'],
   });
 

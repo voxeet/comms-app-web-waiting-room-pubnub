@@ -60,7 +60,7 @@ let externalID = dcHeros[Math.floor(Math.random() * dcHeros.length)];
 
 waitingroom_msg.innerText = `${externalID}, you are now placed in our waiting room, we will be with you shortly`;
 
-admitUsertoMeeting = async (conferenceID) => {
+const admitUserToMeeting = async (conferenceID) => {
   try {
     globalUnsubscribe();
 
@@ -84,7 +84,7 @@ admitUsertoMeeting = async (conferenceID) => {
     startVideoBtn.disabled = false;
     startAudioBtn.disabled = false;
   } catch (error) {
-    console.log("admitUsertoMeeting: " + error);
+    console.log("admitUserToMeeting: " + error);
   }
 };
 
@@ -92,9 +92,7 @@ const initializePubnub = async () => {
   try {
     const response = await fetch(`/pubnubValues`);
     const jsonResponse = await response.json();
-    console.log(jsonResponse);
     pubnub_subscribe_key = jsonResponse.pubnub_subscribe_key;
-    console.log(pubnub_subscribe_key);
     pubnub_publish_key = jsonResponse.pubnub_publish_key;
     pubnub_channel = jsonResponse.pubnub_channel;
     pubnub_presence_url = jsonResponse.pubnub_presence_url;
@@ -117,16 +115,6 @@ const initializePubnub = async () => {
 };
 initializePubnub();
 
-const InviteParticipanttotheMeeting = async (participantID) => {
-  console.log("invited " + participantID.id);
-
-  var participants = [{ id: "", externalId: participantID.id, avatarUrl: "" }];
-
-  let conference = VoxeetSDK.conference.current;
-
-  VoxeetSDK.notification.invite(conference, participants);
-  participantID.remove();
-};
 const handleStartAndStopAudio = () => {
   if (muteAudioFlag === true) {
     // Start sharing the Audio with the other participants
@@ -290,20 +278,19 @@ const globalUnsubscribe = () => {
   }
 };
 
-const IntializeandOpenSession = async () => {
-  VoxeetSDK.conference;
+const InitializeAndOpenSession = async () => {
   let accessToken;
 
   try {
-    const response = await fetch(`/clientAccessToken`);
+    const response = await fetch(`/client-access-token/${externalID}`);
     const jsonResponse = await response.json();
     accessToken = jsonResponse.accessToken;
   } catch (error) {
-    console.log("IntializeandOpenSession: ", error);
+    console.log("InitializeAndOpenSession: ", error);
   }
 
   VoxeetSDK.initializeToken(accessToken, async () => {
-    const r = await fetch(`/clientAccessToken`);
+    const r = await fetch(`/client-access-token/${externalID}`);
     const jResp = await r.json();
     return jResp.accessToken;
   });
@@ -313,11 +300,11 @@ const IntializeandOpenSession = async () => {
       name: externalID,
       externalId: externalID,
     });
-    console.log("Participant session");
+    console.log("Session opened for " + externalID);
   } catch (error) {
     console.log("====================================");
     console.log(`Something went wrong ${error}`);
     console.log("====================================");
   }
 };
-IntializeandOpenSession();
+InitializeAndOpenSession();

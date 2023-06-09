@@ -77,19 +77,18 @@ const initializePubnub = async () => {
 };
 initializePubnub();
 
-const InviteParticipanttotheMeeting = async (participantName) => {
+const InviteParticipantToTheMeeting = async (participantName) => {
   globalUnsubscribe();
-  participantUser = participantName.name;
-  var participants = [{ id: "", externalId: participantUser, avatarUrl: "" }];
+  const participantUser = participantName.name;
+  var participants = [{ info: { externalId: participantUser } }];
   conferenceAliasInput = `${externalID} and ${participantUser}'s meeting`;
-  CreateandJoinConference(conferenceAliasInput);
-  await sleep(1000);
+  await CreateAndJoinConference(conferenceAliasInput);
   container_control.style.display = "initial";
   try {
-    let conference = VoxeetSDK.conference.current;
-    VoxeetSDK.notification.invite(conference, participants);
+    const conference = VoxeetSDK.conference.current;
+    await VoxeetSDK.notification.invite(conference, participants);
   } catch (error) {
-    console.log("InviteParticipanttotheMeeting: " + error);
+    console.log("Invite Participant to the meeting: " + error);
   }
 
   htmlParentElement = document.getElementById(participantUser);
@@ -97,9 +96,9 @@ const InviteParticipanttotheMeeting = async (participantName) => {
   htmlParentElement.remove();
 };
 
-const SendMessagetoParticipant = async (participantName) => {
+const SendMessageToParticipant = async (participantName) => {
   participantName = participantName.name;
-  notificationMessage = `Hello ${participantName}, Dr.Sree here! I am currently attending another patient, I will be with you shortly.`;
+  notificationMessage = `Hello ${participantName}, Dr. here! I am currently attending another patient, I will be with you shortly.`;
   pubnub.publish(
     {
       channel: pubnub_channel,
@@ -114,7 +113,7 @@ const SendMessagetoParticipant = async (participantName) => {
   );
 };
 
-const CreateandJoinConference = async (conferenceAliasInput) => {
+const CreateAndJoinConference = async (conferenceAliasInput) => {
   try {
     let conferenceParams = {
       liveRecording: false,
@@ -139,7 +138,7 @@ const CreateandJoinConference = async (conferenceAliasInput) => {
     };
     confObject = await VoxeetSDK.conference.join(confObject, joinOptions);
   } catch (error) {
-    console.log("CreateandJoinConference: " + error);
+    console.log("CreateAndJoinConference: " + error);
   }
 
   leaveFlag = true;
@@ -317,7 +316,7 @@ listener = {
     }
     userList.forEach((user) => {
       if (user != externalID) {
-        addUsertoWaitingList(user);
+        addUserToWaitingList(user);
       }
     });
   },
@@ -337,7 +336,7 @@ const hereNow = (channel) => {
             let user = response.channels[pubnub_channel].occupants[i].uuid;
             userList[i] = user;
             if (user !== externalID) {
-              addUsertoWaitingList(user);
+              addUserToWaitingList(user);
             }
           } catch (error) {
             console.log(error);
@@ -382,7 +381,7 @@ const removeUserfromWaitingList = (user) => {
   buttonElement.remove();
 };
 
-const addUsertoWaitingList = (user) => {
+const addUserToWaitingList = (user) => {
   const checkIdExists = document.getElementById(user);
   if (!checkIdExists) {
     try {
@@ -405,7 +404,7 @@ const addUsertoWaitingList = (user) => {
       notifyUserBtn.setAttribute("type", "button");
       notifyUserBtn.setAttribute("class", "btn btn-success m-1 ");
       notifyUserBtn.setAttribute("name", user);
-      notifyUserBtn.setAttribute("onclick", "SendMessagetoParticipant(this)");
+      notifyUserBtn.setAttribute("onclick", "SendMessageToParticipant(this)");
       notifyUserBtn.value = "Notify";
       notifyUserBtn.innerHTML = "Notify";
       btnGroup.appendChild(notifyUserBtn);
@@ -416,7 +415,7 @@ const addUsertoWaitingList = (user) => {
       useronWaitbutton.setAttribute("name", user);
       useronWaitbutton.setAttribute(
         "onclick",
-        "InviteParticipanttotheMeeting(this)"
+        "InviteParticipantToTheMeeting(this)"
       );
       useronWaitbutton.innerHTML = "Invite";
 
@@ -428,36 +427,39 @@ const addUsertoWaitingList = (user) => {
       card.appendChild(cardBody);
       container_listGroup.appendChild(card);
     } catch (error) {
-      console.log("addUsertoWaitingList: " + error);
+      console.log("addUserToWaitingList: " + error);
     }
   }
 };
 
-const IntializeandOpenSession = async () => {
-  VoxeetSDK.conference;
+const InitializeAndOpenSession = async () => {
+  const externalId = 'Host';
   let accessToken;
 
   try {
-    const response = await fetch(`/clientAccessToken`);
+    const response = await fetch(`/client-access-token/${externalId}`);
     const jsonResponse = await response.json();
     accessToken = jsonResponse.accessToken;
   } catch (error) {
-    console.log("IntializeandOpenSession: ", error);
+    console.log("InitializeAndOpenSession: ", error);
   }
 
   VoxeetSDK.initializeToken(accessToken, async () => {
-    const r = await fetch(`/clientAccessToken`);
+    const r = await fetch(`/client-access-token/${externalId}`);
     const jResp = await r.json();
     return jResp.accessToken;
   });
 
   try {
-    await VoxeetSDK.session.open({ name: "Host" });
-    console.log("Host session");
+    await VoxeetSDK.session.open({
+      name: externalId,
+      externalId: externalId
+    });
+    console.log(`Session opened for ${externalId}`);
   } catch (error) {
     console.log("====================================");
     console.log(`Something went wrong ${error}`);
     console.log("====================================");
   }
 };
-IntializeandOpenSession();
+InitializeAndOpenSession();
