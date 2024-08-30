@@ -1,3 +1,5 @@
+# :warning: This repository is no longer maintained :warning:
+
 [![License](https://img.shields.io/github/license/dolbyio-samples/blog-video-conference-presence-integration-with-pubnub)](LICENSE)
 
 ![Blog Picture](https://dolby.io/wp-content/uploads/2022/10/Dolby.io_PubNub-V1@1.5x-80.jpg)
